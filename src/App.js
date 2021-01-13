@@ -5,7 +5,6 @@ import { initialBankTransactionsArray } from './data/sampleData'
 function App() {
 
   const [bankTransactionsArray, setBankTransactionsArray] = useState(initialBankTransactionsArray);
-  // const [isHighlighted, setIsHighlighted] = useState(false);
  
   const toggleClass = (event) => {
     let clickedElement = event.target.parentNode;
@@ -28,27 +27,25 @@ function App() {
           {
             bankTransactionsArray[0].map((bankTransactionsColumnHeader, bankTransactionsColumnHeaderIndex) => {
               return (
-                <div key={bankTransactionsColumnHeaderIndex}>{bankTransactionsColumnHeader}</div>
+                <div key={"bankTransactionsColumnHeader" + bankTransactionsColumnHeaderIndex}>{bankTransactionsColumnHeader}</div>
               );
             })
           }
         </div>
         <div className="css-table-body">
           {
-            bankTransactionsArray.map((bankTransaction, bankTransactionIndex) => {
-              if (bankTransactionIndex > 0) {
-                return (
-                  <div className="css-table-row" onClick={toggleClass} key={bankTransactionIndex}>
-                    {
-                      bankTransaction.map((bankTransactionColumnValue, bankTransactionColumnValueIndex) => {
-                        return (
-                          <div key={bankTransactionColumnValueIndex}>{bankTransactionColumnValue}</div>
-                        );
-                      })
-                    }
-                  </div>
-                );
-              }
+            bankTransactionsArray.slice(1).map((bankTransaction, bankTransactionIndex) => {
+              return (
+                <div className="css-table-row" onClick={toggleClass} key={"bankTransactionIndex" + bankTransactionIndex}>
+                  {
+                    bankTransaction.map((bankTransactionColumnValue, bankTransactionColumnValueIndex) => {
+                      return (
+                        <div key={"bankTransactionColumnValueIndex" + bankTransactionColumnValueIndex}>{bankTransactionColumnValue}</div>
+                      );
+                    })
+                  }
+                </div>
+              );
             })
           }
         </div>
