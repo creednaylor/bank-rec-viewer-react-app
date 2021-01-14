@@ -1,0 +1,109 @@
+.App-header {
+    font-size: 2em;
+    text-align: center;
+    margin-top: 1em;
+    /* margin-bottom: 0em; */
+}
+
+.css-table {
+    display: table;
+    padding: 2em;
+}
+
+.css-table-header {
+    display: table-header-group;
+    font-weight: bold;
+    background-color: rgb(191, 191, 191);
+}
+
+.css-table-body {
+    display: table-row-group;
+}
+
+.css-table-row {
+    display: table-row;
+}
+
+.css-table-header div,
+.css-table-row div {
+    display: table-cell;
+    padding: 0 6px;
+}
+
+.css-table-header div {
+    /* height: 40px;
+    line-height: 40px; */
+    text-align: center;
+    border: 1px solid rgb(255, 255, 255);
+    vertical-align: center;
+}
+
+.highlighted {
+    background-color:rgb(43, 99, 143);
+}
+
+
+
+
+##########################################################################################################
+
+
+
+
+import './App.css';
+import { useState } from 'react';
+import { initialBankTransactionsArray } from './data/sampleData'
+
+function App() {
+
+  const [bankTransactionsArray, setBankTransactionsArray] = useState(initialBankTransactionsArray);
+ 
+  const toggleClass = (event) => {
+    let clickedElement = event.target.parentNode;
+
+    if (clickedElement.classList.contains('highlighted')) {
+      clickedElement.classList.remove('highlighted');
+    }
+    else {
+      clickedElement.classList.add('highlighted');
+    }
+  }
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        Bank Reconciliation
+      </header>
+      <div className="css-table">
+        <div className="css-table-header">
+          {
+            bankTransactionsArray[0].map((bankTransactionsColumnHeader, bankTransactionsColumnHeaderIndex) => {
+              return (
+                <div key={"bankTransactionsColumnHeader" + bankTransactionsColumnHeaderIndex}>{bankTransactionsColumnHeader}</div>
+              );
+            })
+          }
+        </div>
+        <div className="css-table-body">
+          {
+            bankTransactionsArray.slice(1).map((bankTransaction, bankTransactionIndex) => {
+              return (
+                <div className="css-table-row" onClick={toggleClass} key={"bankTransactionIndex" + bankTransactionIndex}>
+                  {
+                    bankTransaction.map((bankTransactionColumnValue, bankTransactionColumnValueIndex) => {
+                      return (
+                        <div key={"bankTransactionColumnValueIndex" + bankTransactionColumnValueIndex}>{bankTransactionColumnValue}</div>
+                      );
+                    })
+                  }
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
