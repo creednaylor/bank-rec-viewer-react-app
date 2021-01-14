@@ -5,7 +5,7 @@ import { initialBankTransactionsArray } from './data/sampleData'
 function App() {
 
   const [bankTransactionsArray, setBankTransactionsArray] = useState(initialBankTransactionsArray);
- 
+
   const toggleClass = (event) => {
     let clickedElement = event.target.parentNode;
 
